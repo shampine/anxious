@@ -5,7 +5,6 @@
     "start": "node anxious.js"
   },
   "dependencies": {
-    "finish": "^0.6.2",
     "mailgun": "^0.5.0",
     "nightmare": "^1.5.1"
   }
