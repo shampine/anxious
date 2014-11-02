@@ -1,20 +1,36 @@
 var Nightmare = require('nightmare'),
-    nightmare = new Nightmare(),
+    Finish    = require('finish'),
     Mailgun   = require('mailgun'),
     config    = require('./config.js'),
-    sites     = config.sites;
+    sites     = config.sites,
+    nightmare = '';
 
-nightmare
-  .goto('https://www.patrickshampine.com/contact')
-    .type('#wg_email', 'patrick.shampine@gmail.com')
-    .type('#wg_name', 'Patrick Shampine')
-    .type('#wg_subject', 'Nightmare Test')
-    .type('#wg_message', 'This is the subject, yo.')
-    .click('button.btn')
-  .run(function(err, nightmare){
-    console.log('Test complete');
-    // sendMailgun();
+Finish(function(async) {
+  async(function(done) {
+
+    var fields = '';
+
+    for(var i = 0; i < sites.length; i++) {
+      nightmare = new Nightmare();
+      nightmare.goto(sites[i]['url']);
+      fields = sites[i]['fields'];
+
+      for(var j = 0; j < fields.length; j++) {
+        nightmare.type(fields[j]['id'],fields[j]['text']);
+      }
+
+      nightmare.click(sites[i]['submit']);
+      nightmare.run(function(err, nightmare) {
+        console.log('done');
+      });
+    }
+
   });
+
+}, function(err, results) {
+  console.log('all finished');
+});
+
 
 function sendMailgun() {
   var mailgun = new Mailgun({apiKey: api_key, domain: domain});
@@ -27,5 +43,4 @@ function sendMailgun() {
   }
 
   mailgun.messages().send(data);
-
 }
