@@ -6,12 +6,16 @@ This stems from the idea that live lead generation forms need to be tested in pr
 
 ##tools
 
-[Nightmare JS](http://www.nightmarejs.org/)
+[Nightmare JS](http://www.nightmarejs.org/)  
 [Mailgun JS](https://www.npmjs.org/package/mailgun-js)
 
 ##todo
 
 - everything
+
+##issues
+
+[Open Issues](https://github.com/shampine/anxious/issues?q=is%3Aissue+is%3Aopen+)
 
 ##license
 
