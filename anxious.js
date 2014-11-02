@@ -1,8 +1,8 @@
 var Nightmare = require('nightmare'),
-    Mailgun   = require('mailgun')
-    config    = require('./config.js');
-
-var nightmare = new Nightmare();
+    nightmare = new Nightmare(),
+    Mailgun   = require('mailgun'),
+    config    = require('./config.js'),
+    sites     = config.sites;
 
 nightmare
   .goto('https://www.patrickshampine.com/contact')
@@ -12,9 +12,20 @@ nightmare
     .type('#wg_message', 'This is the subject, yo.')
     .click('button.btn')
   .run(function(err, nightmare){
-    sendMailgun();
+    console.log('Test complete');
+    // sendMailgun();
   });
 
 function sendMailgun() {
-  console.log('Test complete');
+  var mailgun = new Mailgun({apiKey: api_key, domain: domain});
+
+  var data = {
+    from: config.mailgun.from,
+    to: config.mailgun.to,
+    subject: 'Anxious.js Daily Report',
+    text: 'todo:: compile the results here.'
+  }
+
+  mailgun.messages().send(data);
+
 }
