@@ -1,0 +1,11 @@
+{
+  "name": "anxious",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node anxious.js"
+  },
+  "dependencies": {
+    "mailgun-js": "^0.6.7",
+    "nightmare": "^1.5.1"
+  }
+}
